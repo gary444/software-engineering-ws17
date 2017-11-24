@@ -11,6 +11,8 @@ class Main {
     //test
     //System.out.println(Double.parseDouble("hello"));
 
+    //create factory instance
+    ConverterFactory factory = ConverterFactory.getInstance();
     UnitConverter myConverter;
     double numToConvert;
 
@@ -23,33 +25,38 @@ class Main {
       return;
     }
 
+    //create converter with factory
+    myConverter = factory.create(conversion);
 
-    //determine which conversion method is required
-    switch (conversion){
-      case "DollarToEuro":
-        myConverter = new DollarToEuroConverter();
-        break;
-      case "EuroToDollar":
-        myConverter = new EuroToDollarConverter();
-        break;
-      case "SquareFootToSquareMeter":
-        myConverter = new SquareFootToSquareMeterConverter();
-        break;
-      case "SquareMeterToSquareFoot":
-        myConverter = new SquareMeterToSquareFootConverter();
-        break;
-      case "CelsiusToFahrenheit":
-        myConverter = new CelsiusToFahrenheitConverter();
-        break;
-      case "FahrenheitToCelsius":
-        myConverter = new FahrenheitToCelsiusConverter();
-        break;
 
-      default:
-        System.out.println("Error: Conversion type not recognised");
-        return;
 
-    }
+//    // assignment 2 method
+//    //determine which conversion method is required
+//    switch (conversion){
+//      case "DollarToEuro":
+//        myConverter = new DollarToEuroConverter();
+//        break;
+//      case "EuroToDollar":
+//        myConverter = new EuroToDollarConverter();
+//        break;
+//      case "SquareFootToSquareMeter":
+//        myConverter = new SquareFootToSquareMeterConverter();
+//        break;
+//      case "SquareMeterToSquareFoot":
+//        myConverter = new SquareMeterToSquareFootConverter();
+//        break;
+//      case "CelsiusToFahrenheit":
+//        myConverter = new CelsiusToFahrenheitConverter();
+//        break;
+//      case "FahrenheitToCelsius":
+//        myConverter = new FahrenheitToCelsiusConverter();
+//        break;
+//
+//      default:
+//        System.out.println("Error: Conversion type not recognised");
+//        return;
+//
+//    }
 
     //calculate output number and format to 2 d.p.
     String outputValue = String.format("%.02f", myConverter.convert(numToConvert));
