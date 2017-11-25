@@ -2,20 +2,31 @@ import java.util.HashMap;
 
 public class ConcreteConverterFactory implements ConverterFactoryV2 {
 
-    HashMap<String, UnitConverter> hashMap;
+    private static final ConcreteConverterFactory INSTANCE = new ConcreteConverterFactory();
+    private HashMap<String, UnitConverter> hashMap;
 
-    public ConcreteConverterFactory(){
-
+    //private constructor - to implement singleton design pattern
+    private ConcreteConverterFactory(){
 
         //set up hash map
         initMap();
+    }
+
+    //get instance method returns only pre-instantiated instance
+    public static ConcreteConverterFactory getInstance(){
+        return INSTANCE;
     }
 
     //returns converter of appropriate class
     @Override
     public UnitConverter create(String inString) {
 
-        return hashMap.get(inString);
+        UnitConverter returnConverter = hashMap.get(inString);
+
+        //TODO - check return converter is not null
+
+        return returnConverter;
+
     }
 
     //fill hash map with converters, matched with correct text string

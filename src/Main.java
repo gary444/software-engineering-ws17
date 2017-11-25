@@ -9,9 +9,10 @@ class Main {
 
     //create factory instance
     //ConverterFactoryV1 factory = ConverterFactoryV1.getInstance();
+    //ConverterFactoryV2 factory = new ConcreteConverterFactory();
     UnitConverter myConverter;
 
-    ConverterFactoryV2 factory = new ConcreteConverterFactory();
+    ConverterFactoryV2 factory = ConcreteConverterFactory.getInstance();
 
     double numToConvert;
 
@@ -25,40 +26,12 @@ class Main {
     }
 
 
-    //create converter with factory - original attempt
+    //create converter with factory
     //myConverter = ConverterFactoryV1.create(conversion);
-
     myConverter = factory.create(conversionString);
 
+    //TODO - check factory is not null?
 
-
-//    // assignment 2 method
-//    //determine which conversion method is required
-//    switch (conversion){
-//      case "DollarToEuro":
-//        myConverter = new DollarToEuroConverter();
-//        break;
-//      case "EuroToDollar":
-//        myConverter = new EuroToDollarConverter();
-//        break;
-//      case "SquareFootToSquareMeter":
-//        myConverter = new SquareFootToSquareMeterConverter();
-//        break;
-//      case "SquareMeterToSquareFoot":
-//        myConverter = new SquareMeterToSquareFootConverter();
-//        break;
-//      case "CelsiusToFahrenheit":
-//        myConverter = new CelsiusToFahrenheitConverter();
-//        break;
-//      case "FahrenheitToCelsius":
-//        myConverter = new FahrenheitToCelsiusConverter();
-//        break;
-//
-//      default:
-//        System.out.println("Error: Conversion type not recognised");
-//        return;
-//
-//    }
 
     //calculate output number and format to 2 d.p.
     String outputValue = String.format("%.02f", myConverter.convert(numToConvert));
