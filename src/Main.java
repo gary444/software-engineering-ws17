@@ -1,19 +1,18 @@
 //package SE_Ex2;
 
-import TinyTestJ.RunTests;
-
 class Main {
   public static void main(String[] args)
   {
-    String conversion = args[0];
+    String conversionString = args[0];
     String value = args[1];
 
-    //test
-    //System.out.println(Double.parseDouble("hello"));
 
     //create factory instance
-    ConverterFactory factory = ConverterFactory.getInstance();
+    //ConverterFactoryV1 factory = ConverterFactoryV1.getInstance();
     UnitConverter myConverter;
+
+    ConverterFactoryV2 factory = new ConcreteConverterFactory();
+
     double numToConvert;
 
     //check that input value is a number
@@ -25,8 +24,11 @@ class Main {
       return;
     }
 
-    //create converter with factory
-    myConverter = factory.create(conversion);
+
+    //create converter with factory - original attempt
+    //myConverter = ConverterFactoryV1.create(conversion);
+
+    myConverter = factory.create(conversionString);
 
 
 
