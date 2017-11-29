@@ -18,6 +18,29 @@ public class Assert {
      assertEquals(null, expected, actual, delta);
   }
 
+  //added this function to test factory
+  public static void assertEquals(Object expected, Object result){
+
+    //if either object is null....
+    if (expected == null || result == null) {
+      //pass if both are null
+      if (expected == null && result == null){
+        //pass
+      }
+      //but fail if only one is null
+      else {
+        fail("null object error");
+      }
+    }
+
+    //if classes are not equal
+    else if(!expected.getClass().equals(result.getClass())){
+      //fail and print message
+      fail("Classes are not of same type!! Expected " + expected.toString() +
+            " but received " + result.toString());
+    }
+  }
+
   // helper methods to format strings etc.
 
   public static void fail(String message) {
@@ -26,6 +49,8 @@ public class Assert {
     }
     throw new AssertionError(message);
   }
+
+
 
   public static void fail() {
     fail(null);

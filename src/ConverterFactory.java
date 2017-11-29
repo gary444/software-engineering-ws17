@@ -1,31 +1,26 @@
 import java.util.HashMap;
 
-public class ConcreteConverterFactory implements AbstractConverterFactory {
+public class ConverterFactory {
 
-    private static final ConcreteConverterFactory INSTANCE = new ConcreteConverterFactory();
+    private static final ConverterFactory INSTANCE = new ConverterFactory();
     private HashMap<String, UnitConverter> hashMap;
 
     //private constructor - to implement singleton design pattern
-    private ConcreteConverterFactory(){
+    private ConverterFactory(){
 
         //set up hash map
         initMap();
     }
 
     //get instance method returns only pre-instantiated instance
-    public static ConcreteConverterFactory getInstance(){
+    public static ConverterFactory getInstance(){
         return INSTANCE;
     }
 
     //returns converter of appropriate class
-    @Override
+    //may return null object if string does not match
     public UnitConverter create(String inString) {
-
-        UnitConverter returnConverter = hashMap.get(inString);
-        //TODO - check return converter is not null
-
-        return returnConverter;
-
+        return hashMap.get(inString);
     }
 
     //fill hash map with converters, matched with correct text string
@@ -37,7 +32,7 @@ public class ConcreteConverterFactory implements AbstractConverterFactory {
         hashMap.put("EuroToDollar", new EuroToDollarConverter());
         hashMap.put("CelsiusToFahrenheit", new CelsiusToFahrenheitConverter());
         hashMap.put("FahrenheitToCelsius", new FahrenheitToCelsiusConverter());
-        hashMap.put("SquareFootToSquareMeterConverter", new SquareFootToSquareMeterConverter());
-        hashMap.put("SquareMeterToSquareFootConverter", new SquareMeterToSquareFootConverter());
+        hashMap.put("SquareFootToSquareMeter", new SquareFootToSquareMeterConverter());
+        hashMap.put("SquareMeterToSquareFoot", new SquareMeterToSquareFootConverter());
     }
 }

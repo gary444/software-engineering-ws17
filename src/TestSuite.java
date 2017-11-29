@@ -1,67 +1,123 @@
 import TinyTestJ.Test;
+
 import static TinyTestJ.Assert.*;
 
 public class TestSuite {
 
-  private  static UnitConverter test;
+  private  static UnitConverter testConverter;
   private static double result;
+
+  private static ConverterFactory factory = ConverterFactory.getInstance();
+
+
+
+  //====================================================================
+//  //factory testing
+  @Test public static void FTest1() {
+    testConverter = factory.create("DollarToEuro");
+    assertEquals(new DollarToEuroConverter(),testConverter);
+  }
+
+  @Test public static void FTest2() {
+    testConverter = factory.create("EuroToDollar");
+    assertEquals(new EuroToDollarConverter(),testConverter);
+  }
+
+  @Test public static void FTest3() {
+    testConverter = factory.create("CelsiusToFahrenheit");
+    assertEquals(new CelsiusToFahrenheitConverter(),testConverter);
+  }
+
+  @Test public static void FTest4() {
+    testConverter = factory.create("FahrenheitToCelsius");
+    assertEquals(new FahrenheitToCelsiusConverter(),testConverter);
+  }
+
+  @Test public static void FTest5() {
+    testConverter = factory.create("SquareFootToSquareMeter");
+    assertEquals(new SquareFootToSquareMeterConverter(),testConverter);
+  }
+
+  @Test public static void FTest6() {
+    testConverter = factory.create("SquareMeterToSquareFoot");
+    assertEquals(new SquareMeterToSquareFootConverter(),testConverter);
+  }
+
+  //erroneous input tests - factory should return null object
+  @Test public static void FTest7() {
+    testConverter = factory.create("hd ha");
+    assertEquals(null,testConverter);
+  }
+
+  @Test public static void FTest8() {
+    testConverter = factory.create(null);
+    assertEquals(null,testConverter);
+  }
+
+  @Test public static void FTest9() {
+    testConverter = factory.create("");
+    assertEquals(null,testConverter);
+  }
+
+
+
 
   //====================================================================
   // Dollar To Euro
   @Test public static void DETest1() {
-    test = new DollarToEuroConverter();
-    result = test.convert(10000);
+    testConverter = new DollarToEuroConverter();
+    result = testConverter.convert(10000);
     assertEquals(8600,result,0.001);
   }
   @Test public static void DETest2() {
-    test = new DollarToEuroConverter();
-    result = test.convert(-10000);
+    testConverter = new DollarToEuroConverter();
+    result = testConverter.convert(-10000);
     assertEquals(0,result,0.001);
   }
 
   @Test public static void DETest3() {
-    test = new DollarToEuroConverter();
-    result = test.convert(-0);
+    testConverter = new DollarToEuroConverter();
+    result = testConverter.convert(-0);
     assertEquals(0,result,0.001);
   }
 
   //====================================================================
   // Euro To Dollar
   @Test public static void EDTest1() {
-    test = new EuroToDollarConverter();
-    result = test.convert(10);
+    testConverter = new EuroToDollarConverter();
+    result = testConverter.convert(10);
     assertEquals(11.6,result,0.001);
   }
 
   @Test public static void EDTest2() {
-    test = new EuroToDollarConverter();
-    result = test.convert(-499);
+    testConverter = new EuroToDollarConverter();
+    result = testConverter.convert(-499);
     assertEquals(0,result,0.001);
   }
 
   @Test public static void EDTest3() {
-    test = new EuroToDollarConverter();
-    result = test.convert(1000000);
+    testConverter = new EuroToDollarConverter();
+    result = testConverter.convert(1000000);
     assertEquals(1160000,result,0.001);
   }
 
   //====================================================================
   // Square Meter to Square Foot
   @Test public static void SM_SF_Test1() {
-    test = new SquareMeterToSquareFootConverter();
-    result = test.convert(-4);
+    testConverter = new SquareMeterToSquareFootConverter();
+    result = testConverter.convert(-4);
     assertEquals(0, result, 0.001);
   }
 
   @Test public static void SM_SF_Test2() {
-    test = new SquareMeterToSquareFootConverter();
-    result = test.convert(200);
+    testConverter = new SquareMeterToSquareFootConverter();
+    result = testConverter.convert(200);
     assertEquals(2152, result, 0.001);
   }
 
   @Test public static void SM_SF_Test3() {
-    test = new SquareMeterToSquareFootConverter();
-    result = test.convert(-0);
+    testConverter = new SquareMeterToSquareFootConverter();
+    result = testConverter.convert(-0);
     assertEquals(0, result, 0.001);
   }
 
@@ -69,20 +125,20 @@ public class TestSuite {
   // Square Foot to Square Meter
 
   @Test public static void SF_SM_Test1() {
-    test = new SquareFootToSquareMeterConverter();
-    result = test.convert(-0);
+    testConverter = new SquareFootToSquareMeterConverter();
+    result = testConverter.convert(-0);
     assertEquals(0, result, 0.001);
   }
 
   @Test public static void SF_SM_Test2() {
-    test = new SquareFootToSquareMeterConverter();
-    result = test.convert(600);
+    testConverter = new SquareFootToSquareMeterConverter();
+    result = testConverter.convert(600);
     assertEquals(55.8, result, 0.001);
   }
 
   @Test public static void SF_SM_Test3() {
-    test = new SquareFootToSquareMeterConverter();
-    result = test.convert(-100000);
+    testConverter = new SquareFootToSquareMeterConverter();
+    result = testConverter.convert(-100000);
     assertEquals(0, result, 0.001);
   }
 
@@ -90,20 +146,20 @@ public class TestSuite {
   //====================================================================
   // celsius to fahrenheit
   @Test public static void CFTest1() {
-    test = new CelsiusToFahrenheitConverter();
-    result = test.convert(40);
+    testConverter = new CelsiusToFahrenheitConverter();
+    result = testConverter.convert(40);
     assertEquals(104, result, 0.001);
   }
 
   @Test public static void CFTest2() {
-    test = new CelsiusToFahrenheitConverter();
-    result = test.convert(-50);
+    testConverter = new CelsiusToFahrenheitConverter();
+    result = testConverter.convert(-50);
     assertEquals(-58, result, 0.001);
   }
 
   @Test public static void CFTest3() {
-    test = new CelsiusToFahrenheitConverter();
-    result = test.convert(-0);
+    testConverter = new CelsiusToFahrenheitConverter();
+    result = testConverter.convert(-0);
     assertEquals(32, result, 0.001);
   }
 
@@ -112,20 +168,20 @@ public class TestSuite {
   // fahrenheit to celsius
 
   @Test public static void FCTest1() {
-    test = new FahrenheitToCelsiusConverter();
-    result = test.convert(-40);
+    testConverter = new FahrenheitToCelsiusConverter();
+    result = testConverter.convert(-40);
     assertEquals(-40, result, 0.001);
   }
 
   @Test public static void FCTest2() {
-    test = new FahrenheitToCelsiusConverter();
-    result = test.convert(-0);
+    testConverter = new FahrenheitToCelsiusConverter();
+    result = testConverter.convert(-0);
     assertEquals(-17.7777, result, 0.001);
   }
 
   @Test public static void FCTest3() {
-    test = new FahrenheitToCelsiusConverter();
-    result = test.convert(100);
+    testConverter = new FahrenheitToCelsiusConverter();
+    result = testConverter.convert(100);
     assertEquals(37.7777, result, 0.001);
   }
 

@@ -6,13 +6,8 @@ class Main {
     String conversionString = args[0];
     String value = args[1];
 
-
-    //create factory instance
-    //ConverterFactoryV1 factory = ConverterFactoryV1.getInstance();
-    //AbstractConverterFactory factory = new ConcreteConverterFactory();
-    UnitConverter myConverter;
-
-    AbstractConverterFactory factory = ConcreteConverterFactory.getInstance();
+    //create singleton factory instance
+    ConverterFactory factory = ConverterFactory.getInstance();
 
     double numToConvert;
 
@@ -25,13 +20,15 @@ class Main {
       return;
     }
 
+    //attempt to create converter with factory
+    UnitConverter myConverter = factory.create(conversionString);
 
-    //create converter with factory
-    //myConverter = ConverterFactoryV1.create(conversion);
-    myConverter = factory.create(conversionString);
-
-    //TODO - check factory is not null?
-
+    //display options and quit if converter creation fails
+    if(myConverter == null){
+      System.out.println("\nConversion type not recognised!");
+      displayOptions();
+      return;
+    }
 
     //calculate output number and format to 2 d.p.
     String outputValue = String.format("%.02f", myConverter.convert(numToConvert));
@@ -41,4 +38,16 @@ class Main {
         outputValue + " " + myConverter.getOutputUnits());
 
   }
+
+  public static void displayOptions(){
+    System.out.println("Available conversion commands:");
+    System.out.println("- DollarToEuro");
+    System.out.println("- EuroToDollar");
+    System.out.println("- CelsiusToFahrenheit");
+    System.out.println("- FahrenheitToCelsius");
+    System.out.println("- SquareFootToSquareMeter");
+    System.out.println("- SquareMeterToSquareFoot");
+  }
 }
+
+
