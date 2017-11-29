@@ -1,4 +1,4 @@
-public interface ConverterFactoryV2 {
+public interface AbstractConverterFactory {
 
     UnitConverter create(String inString);
 

@@ -9,10 +9,10 @@ class Main {
 
     //create factory instance
     //ConverterFactoryV1 factory = ConverterFactoryV1.getInstance();
-    //ConverterFactoryV2 factory = new ConcreteConverterFactory();
+    //AbstractConverterFactory factory = new ConcreteConverterFactory();
     UnitConverter myConverter;
 
-    ConverterFactoryV2 factory = ConcreteConverterFactory.getInstance();
+    AbstractConverterFactory factory = ConcreteConverterFactory.getInstance();
 
     double numToConvert;
 

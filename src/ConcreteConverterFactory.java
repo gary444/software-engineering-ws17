@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class ConcreteConverterFactory implements ConverterFactoryV2 {
+public class ConcreteConverterFactory implements AbstractConverterFactory {
 
     private static final ConcreteConverterFactory INSTANCE = new ConcreteConverterFactory();
     private HashMap<String, UnitConverter> hashMap;
@@ -22,7 +22,6 @@ public class ConcreteConverterFactory implements ConverterFactoryV2 {
     public UnitConverter create(String inString) {
 
         UnitConverter returnConverter = hashMap.get(inString);
-
         //TODO - check return converter is not null
 
         return returnConverter;
@@ -40,7 +39,5 @@ public class ConcreteConverterFactory implements ConverterFactoryV2 {
         hashMap.put("FahrenheitToCelsius", new FahrenheitToCelsiusConverter());
         hashMap.put("SquareFootToSquareMeterConverter", new SquareFootToSquareMeterConverter());
         hashMap.put("SquareMeterToSquareFootConverter", new SquareMeterToSquareFootConverter());
-
-
     }
 }
