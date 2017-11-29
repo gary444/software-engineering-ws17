@@ -2,14 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9e70bd2-4abb-443d-93d7-c5b5239e1152" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ConcreteConverterFactory.java" afterPath="$PROJECT_DIR$/src/ConverterFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.class" afterPath="$PROJECT_DIR$/src/Main.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/Area_Converter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/CelsiusToFahrenheitConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/ClassDiagram.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/CurrencyConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/DollarToEuroConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/EuroToDollarConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/FahrenheitToCelsiusConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/Main.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/SequenceDiagram.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/SquareFootToSquareMeterConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/SquareMeterToSquareFootConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/TemperatureConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/TestSuite.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment 2 hand in/UnitConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AbstractConverterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ConverterFactoryV1.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TestSuite.class" afterPath="$PROJECT_DIR$/src/TestSuite.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TinyTestJ/Assert.class" afterPath="$PROJECT_DIR$/src/TinyTestJ/Assert.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TestSuite.java" afterPath="$PROJECT_DIR$/src/TestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TinyTestJ/Assert.java" afterPath="$PROJECT_DIR$/src/TinyTestJ/Assert.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,16 +32,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ConverterFactoryV1.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ConverterFactoryV1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ConverterFactory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConverterFactory.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -49,8 +50,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+            <state relative-caret-position="518">
+              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -404,8 +405,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        <state relative-caret-position="518">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
       </provider>
