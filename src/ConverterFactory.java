@@ -34,5 +34,8 @@ public class ConverterFactory {
         hashMap.put("FahrenheitToCelsius", new FahrenheitToCelsiusConverter());
         hashMap.put("SquareFootToSquareMeter", new SquareFootToSquareMeterConverter());
         hashMap.put("SquareMeterToSquareFoot", new SquareMeterToSquareFootConverter());
+
+
+
     }
 }
