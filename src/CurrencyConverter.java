@@ -1,4 +1,4 @@
-public abstract class CurrencyConverter extends UnitConverter {
+public abstract class CurrencyConverter extends AbstractUnitConverter {
 
 
 }

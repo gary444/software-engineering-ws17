@@ -1,26 +1,14 @@
-//package SE_Ex2;
+public interface UnitConverter {
 
-public abstract class UnitConverter
-{
-
-  private String inputUnits = "";
-  private String outputUnits = "";
-
-  public UnitConverter() { }
-  public abstract double convert(double inValue);
-  public abstract String toString();
-  public void print(){
-    System.out.println(toString());
-  }
+    double convert(double inValue);
+    String toString();
 
 
+    void print();
 
-  public String getInputUnits(){
-    return inputUnits;
-  }
-  public String getOutputUnits(){ return outputUnits; }
+    String getInputUnits();
+    String getOutputUnits();
 
-  public void setInputUnits(String inString){inputUnits = inString;}
-  public void setOutputUnits(String inString){outputUnits = inString;}
-};
-
+    void setInputUnits(String inString);
+    void setOutputUnits(String inString);
+}

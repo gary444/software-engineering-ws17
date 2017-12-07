@@ -1,2 +1,2 @@
-public abstract class TemperatureConverter extends UnitConverter{
+public abstract class TemperatureConverter extends AbstractUnitConverter {
 }

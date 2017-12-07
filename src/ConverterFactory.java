@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class ConverterFactory {
 
     private static final ConverterFactory INSTANCE = new ConverterFactory();
-    private HashMap<String, UnitConverter> hashMap;
+    private HashMap<String, AbstractUnitConverter> hashMap;
 
     //private constructor - to implement singleton design pattern
     private ConverterFactory(){
@@ -19,14 +19,14 @@ public class ConverterFactory {
 
     //returns converter of appropriate class
     //may return null object if string does not match
-    public UnitConverter create(String inString) {
+    public AbstractUnitConverter create(String inString) {
         return hashMap.get(inString);
     }
 
     //fill hash map with converters, matched with correct text string
     private void initMap(){
 
-        hashMap = new HashMap<String, UnitConverter>();
+        hashMap = new HashMap<String, AbstractUnitConverter>();
 
         hashMap.put("DollarToEuro", new DollarToEuroConverter());
         hashMap.put("EuroToDollar", new EuroToDollarConverter());
