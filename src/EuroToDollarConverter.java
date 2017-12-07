@@ -19,8 +19,5 @@ public class EuroToDollarConverter extends CurrencyConverter {
         return "Euro to Dollar";
     }
 
-//    public void print(){
-//        System.out.println(toString());
-//    }
 
 }

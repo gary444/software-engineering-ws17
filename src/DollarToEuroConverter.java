@@ -22,7 +22,4 @@ public class DollarToEuroConverter extends CurrencyConverter
     return "Dollar to Euro Converter";
   }
 
-  //public void print(){
-  //  System.out.println(toString());
-  //}
-};
+}

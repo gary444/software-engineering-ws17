@@ -1,20 +1,18 @@
 //package SE_Ex2;
 
-public abstract class UnitConverter
+public abstract class AbstractUnitConverter implements UnitConverter
 {
 
   private String inputUnits = "";
   private String outputUnits = "";
 
-  public UnitConverter() { }
-  public abstract double convert(double inValue);
-  public abstract String toString();
+  //public AbstractUnitConverter() { }
   public void print(){
     System.out.println(toString());
   }
 
 
-
+  //common method implementation for all unit converters
   public String getInputUnits(){
     return inputUnits;
   }

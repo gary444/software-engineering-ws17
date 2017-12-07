@@ -42,18 +42,28 @@ public class TestSuite {
     assertEquals(new SquareMeterToSquareFootConverter(),testConverter);
   }
 
-  //erroneous input tests - factory should return null object
   @Test public static void FTest7() {
+    testConverter = factory.create("EuroToPound");
+    assertEquals(new EuroToPoundConverter(),testConverter);
+  }
+
+  @Test public static void FTest8() {
+    testConverter = factory.create("PoundToEuro");
+    assertEquals(new PoundToEuroConverter(),testConverter);
+  }
+
+  //erroneous input tests - factory should return null object
+  @Test public static void FTest10() {
     testConverter = factory.create("hd ha");
     assertEquals(null,testConverter);
   }
 
-  @Test public static void FTest8() {
+  @Test public static void FTest11() {
     testConverter = factory.create(null);
     assertEquals(null,testConverter);
   }
 
-  @Test public static void FTest9() {
+  @Test public static void FTest12() {
     testConverter = factory.create("");
     assertEquals(null,testConverter);
   }
@@ -98,6 +108,36 @@ public class TestSuite {
     testConverter = new EuroToDollarConverter();
     result = testConverter.convert(1000000);
     assertEquals(1160000,result,0.001);
+  }
+
+  //====================================================================
+  // Euro To Pound
+
+  @Test public static void EPTest1() {
+    testConverter = new EuroToPoundConverter();
+    result = testConverter.convert(10);
+    assertEquals(8.8, result,0.001);
+  }
+
+  @Test public static void EPTest2() {
+    testConverter = new EuroToPoundConverter();
+    result = testConverter.convert(-10);
+    assertEquals(0, result,0.001);
+  }
+
+  //====================================================================
+  // Pound To Euro
+
+  @Test public static void PETest1() {
+    testConverter = new PoundToEuroConverter();
+    result = testConverter.convert(10);
+    assertEquals(11.4, result,0.001);
+  }
+
+  @Test public static void PETest2() {
+    testConverter = new PoundToEuroConverter();
+    result = testConverter.convert(-10);
+    assertEquals(0, result,0.001);
   }
 
   //====================================================================

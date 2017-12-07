@@ -30,6 +30,8 @@ public class ConverterFactory {
 
         hashMap.put("DollarToEuro", new DollarToEuroConverter());
         hashMap.put("EuroToDollar", new EuroToDollarConverter());
+        hashMap.put("EuroToPound", new EuroToPoundConverter());
+        hashMap.put("PoundToEuro", new PoundToEuroConverter());
         hashMap.put("CelsiusToFahrenheit", new CelsiusToFahrenheitConverter());
         hashMap.put("FahrenheitToCelsius", new FahrenheitToCelsiusConverter());
         hashMap.put("SquareFootToSquareMeter", new SquareFootToSquareMeterConverter());
