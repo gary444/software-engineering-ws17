@@ -13,6 +13,12 @@ abstract class ConverterDecorator implements UnitConverter {
         return converterToDecorate.convert(inValue);
     }
 
+
+    @Override
+    public void printConversion(double inputValue, double convertedValue) {
+        converterToDecorate.printConversion(inputValue, convertedValue);
+    }
+
     @Override
     public void print() {
         converterToDecorate.print();

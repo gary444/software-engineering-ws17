@@ -16,6 +16,6 @@ public class EuroToPoundConverter extends CurrencyConverter {
     }
 
     public String toString(){
-        return "Euro to Pound";
+        return "Euro to Pound Converter";
     }
 }
