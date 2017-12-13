@@ -1,15 +1,16 @@
+import java.io.IOException;
+
 public class InversionConverter extends ConverterDecorator{
 
-    public InversionConverter(UnitConverter converterToDecorate){
+    public InversionConverter(UnitConverter converterToDecorate) throws IllegalArgumentException{
 
         super(converterToDecorate);
 
         //check that converterToDecorate is not a temperature converter
         if (converterToDecorate instanceof TemperatureConverter){
-            System.err.println("Cannot use 'invert' for temperature conversions!!");
-            System.exit(0);
-        }
 
+            throw new IllegalArgumentException("Cannot use 'invert' for temperature conversions!");
+        }
     }
 
     public double convert(double inValue){
@@ -23,9 +24,6 @@ public class InversionConverter extends ConverterDecorator{
 
     @Override
     public void printConversion(double inputValue, double convertedValue) {
-        //super.printConversion(inputValue, convertedValue);
-
-        //System.out.println("Inverted conversion printing...!!!");
 
         //format num value
         String outputValue = String.format("%.02f", convertedValue);

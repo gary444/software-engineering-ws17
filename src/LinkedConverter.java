@@ -4,12 +4,9 @@ public class LinkedConverter extends ConverterDecorator {
 
     public LinkedConverter(UnitConverter newConvToDecorate){
         super(newConvToDecorate);
-
-        //System.out.println("linked converter created with conv of type :" + newConvToDecorate.toString());
-
     }
 
-    public void link(UnitConverter convToLink){
+    public void link(UnitConverter convToLink) throws IllegalArgumentException {
 
         //compare output units of linked converter with
         // input units of this converter
@@ -19,8 +16,9 @@ public class LinkedConverter extends ConverterDecorator {
         String linkIn = this.converterToDecorate.getInputUnits();
 
         if (!linkOut.equals(linkIn)) {
-            System.out.println("Linked converters do not match!");
-            System.exit(0);
+//            System.out.println("Linked converters do not match!");
+//            System.exit(0);
+            throw new IllegalArgumentException("Linked converters do not match!");
         }
 
         this.inputConverter = convToLink;
@@ -31,7 +29,6 @@ public class LinkedConverter extends ConverterDecorator {
 
         //convert with linked converter first
         double result = inputConverter.convert(inValue);
-
 
         //then convert value with own converter
         return super.convert(result);

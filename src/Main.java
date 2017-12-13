@@ -25,15 +25,14 @@ class Main {
 
     //test scanner loop=====================================================
     Scanner sc = new Scanner(System.in);
+    System.out.println("Enter a conversion: (Ctrl-D to quit and print all conversions)");
     while (sc.hasNext()){
-      System.out.println("Enter a conversion:");
+
 
       String s = sc.nextLine();
       String[] inputs = s.split("\\s+");
 
       conversion1String = inputs[0];
-
-
 
       //if there are 3 arguments, a decorator is needed
       if (inputs.length == 3){
@@ -44,27 +43,32 @@ class Main {
           value = inputs[2];
 
           //input value validation
-          try {
-            numToConvert = toNumber(value);
-          }
-          catch (NumberFormatException e){
-            System.out.println(" - Input number not valid - ");
+          if (validateNumString(value))
+            numToConvert = Double.parseDouble(value);
+          else
             continue;
-          }
 
           UnitConverter myConverter = factory.create(conversion1String);
 
-          //display options and quit if converter creation fails
+          //display options if converter creation fails
           if(myConverter == null){
             System.out.println("\n - Conversion type not recognised! - ");
             displayOptions();
             continue;
           }
 
-          InversionConverter inversionConverter = new InversionConverter(myConverter);
+          //check that inversion converter can be used - will throw an exception if not
+          InversionConverter inversionConverter = null;
+          try {
+            inversionConverter = new InversionConverter(myConverter);
+          }
+          catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            continue;
+          }
+
           Command command = new ConvertCommand(inversionConverter, numToConvert);
           commandList.add(command);
-
 
         }
         //if not inversion, attempt to link converters
@@ -74,13 +78,10 @@ class Main {
           value = inputs[2];
 
           //input value validation
-          try {
-            numToConvert = toNumber(value);
-          }
-          catch (NumberFormatException e){
-            System.out.println(" - Input number not valid - ");
+          if (validateNumString(value))
+            numToConvert = Double.parseDouble(value);
+          else
             continue;
-          }
 
           //attempt to create converter with factory
           UnitConverter myConverter1 = factory.create(conversion1String);
@@ -96,7 +97,15 @@ class Main {
 
           //create converter decorator to allow linking
           LinkedConverter linkedConverter = new LinkedConverter(myConverter1);
-          linkedConverter.link(myConverter2);
+
+          //check that these converters can be linked without an exception
+          try {
+            linkedConverter.link(myConverter2);
+          }
+          catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            continue;
+          }
 
           //create and invoke command
           Command command = new ConvertCommand(linkedConverter, numToConvert);
@@ -111,13 +120,11 @@ class Main {
         value = inputs[1];
 
         //input value validation
-        try {
-          numToConvert = toNumber(value);
-        }
-        catch (NumberFormatException e){
-          System.out.println(" - Input number not valid - ");
+        if (validateNumString(value))
+          numToConvert = Double.parseDouble(value);
+        else
+          continue;
 
-        }
 
         //attempt to create converter with factory
         UnitConverter myConverter = factory.create(conversion1String);
@@ -134,27 +141,39 @@ class Main {
 
       }
 
+      System.out.println("Enter a conversion: (Ctrl-D to quit and print all conversions)");
+
     }
     //end test scanner loop=====================================================
 
+    //print output...
+    System.out.println("---------------------------------------");
     //cycle through command list and execute each command
     for (int i = 0; i < commandList.size(); i++){
 
+      System.out.print("(" + i + ")");
       invoker.execute(commandList.get(i));
     }
-
+    System.out.println("---------------------------------------");
     System.out.println("Conversion program ended.");
 
   }
 
-  //converts input, and validates that input string is a number
-  public static double toNumber(String inString) throws NumberFormatException {
 
-    double numToConvert = 0.0;
+  public static boolean validateNumString(String inString){
 
-    numToConvert = Double.parseDouble(inString);
+    //input value validation
+    try {
+      double num = Double.parseDouble(inString);
+    }
+    catch (NumberFormatException e){
+      System.out.println(" - Input number not valid - ");
+      return false;
+    }
 
-    return numToConvert;
+
+    return true;
+
   }
 
   //displays all options as text to the user
@@ -177,8 +196,4 @@ class Main {
     System.out.println("- this will convert from pound > euro > dollar\n\n");
 
   }
-
-
 }
-
-
