@@ -16,7 +16,7 @@ public class EuroToDollarConverter extends CurrencyConverter {
     }
 
     public String toString(){
-        return "Euro to Dollar";
+        return "Euro to Dollar Converter";
     }
 
 

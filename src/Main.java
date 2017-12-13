@@ -1,5 +1,4 @@
 //package SE_Ex2;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -7,32 +6,21 @@ import java.util.Scanner;
 class Main {
   public static void main(String[] args)
   {
-
-    //create singleton factory instance
-    ConverterFactory factory = ConverterFactory.getInstance();
-
     //command pattern actors
     LinkedList<Command> commandList = new LinkedList<>();
-    Invoker invoker = new Invoker();
 
-    String conversion1String;
-    String conversion2String;
-    String value;
-    double numToConvert = 0.0;
-
-
-    displayOptions();
-
-    //test scanner loop=====================================================
     Scanner sc = new Scanner(System.in);
-    System.out.println("Enter a conversion: (Ctrl-D to quit and print all conversions)");
-    while (sc.hasNext()){
 
+    //print initial info
+    displayOptions();
+    System.out.println("Enter a conversion: (Ctrl-D to quit and print all conversions)");
+
+    while (sc.hasNext()){
 
       String s = sc.nextLine();
       String[] inputs = s.split("\\s+");
 
-      conversion1String = inputs[0];
+      Command command = null;
 
       //if there are 3 arguments, a decorator is needed
       if (inputs.length == 3){
@@ -40,126 +28,167 @@ class Main {
         //check for inversion argument
         if (inputs[1].equals("invert")){
 
-          value = inputs[2];
-
-          //input value validation
-          if (validateNumString(value))
-            numToConvert = Double.parseDouble(value);
-          else
-            continue;
-
-          UnitConverter myConverter = factory.create(conversion1String);
-
-          //display options if converter creation fails
-          if(myConverter == null){
-            System.out.println("\n - Conversion type not recognised! - ");
-            displayOptions();
-            continue;
-          }
-
-          //check that inversion converter can be used - will throw an exception if not
-          InversionConverter inversionConverter = null;
-          try {
-            inversionConverter = new InversionConverter(myConverter);
-          }
-          catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            continue;
-          }
-
-          Command command = new ConvertCommand(inversionConverter, numToConvert);
-          commandList.add(command);
-
+          command = invertedCalculation(inputs[0], inputs[2]);
         }
         //if not inversion, attempt to link converters
         else {
 
-          conversion2String = inputs[1];
-          value = inputs[2];
-
-          //input value validation
-          if (validateNumString(value))
-            numToConvert = Double.parseDouble(value);
-          else
-            continue;
-
-          //attempt to create converter with factory
-          UnitConverter myConverter1 = factory.create(conversion1String);
-          UnitConverter myConverter2 = factory.create(conversion2String);
-
-          //display options if converter creation fails
-          if(myConverter1 == null || myConverter2 == null){
-            System.out.println("\nConversion type not recognised!");
-            displayOptions();
-            continue;
-          }
-
-
-          //create converter decorator to allow linking
-          LinkedConverter linkedConverter = new LinkedConverter(myConverter1);
-
-          //check that these converters can be linked without an exception
-          try {
-            linkedConverter.link(myConverter2);
-          }
-          catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            continue;
-          }
-
-          //create and invoke command
-          Command command = new ConvertCommand(linkedConverter, numToConvert);
-          commandList.add(command);
-
+          command = linkedCalculation(inputs[0], inputs[1], inputs[2]);
         }
-
       }
-      //if just 2 arguments, do normal conversion
+      //if just 2 arguments, do basic conversion
       else if (inputs.length == 2){
 
-        value = inputs[1];
-
-        //input value validation
-        if (validateNumString(value))
-          numToConvert = Double.parseDouble(value);
-        else
-          continue;
-
-
-        //attempt to create converter with factory
-        UnitConverter myConverter = factory.create(conversion1String);
-
-        //display options if converter creation fails
-        if(myConverter == null){
-          System.out.println("\nConversion type not recognised!");
-          displayOptions();
-          continue;
-        }
-
-        Command command = new ConvertCommand(myConverter, numToConvert);
-        commandList.add(command);
-
+        command = basicCalculation(inputs[0], inputs[1]);
       }
+      else {
+        System.out.println("Invalid Input.");
+      }
+
+      //add command to list unless it is null
+      if (command != null)
+        commandList.add(command);
 
       System.out.println("Enter a conversion: (Ctrl-D to quit and print all conversions)");
 
     }
     //end test scanner loop=====================================================
 
-    //print output...
-    System.out.println("---------------------------------------");
-    //cycle through command list and execute each command
-    for (int i = 0; i < commandList.size(); i++){
+    convertAndPrintAll(commandList);
 
-      System.out.print("(" + i + ")");
-      invoker.execute(commandList.get(i));
-    }
-    System.out.println("---------------------------------------");
-    System.out.println("Conversion program ended.");
 
   }
 
 
+  //takes two strings describing conversion types,
+  // and another string describing a string value
+  // returns a command for a linked conversion or
+  // returns null if arguments are invalid
+  public static Command linkedCalculation(String conversion1String, String conversion2String, String value){
+
+    double numToConvert;
+
+    //input value validation
+    if (validateNumString(value))
+      numToConvert = Double.parseDouble(value);
+    else
+      return null;
+
+    //attempt to create converter with factory
+    ConverterFactory factory = ConverterFactory.getInstance();
+    UnitConverter myConverter1 = factory.create(conversion1String);
+    UnitConverter myConverter2 = factory.create(conversion2String);
+
+    //display options if converter creation fails
+    if(myConverter1 == null || myConverter2 == null){
+      System.out.println("\nConversion type not recognised!");
+      displayOptions();
+      return null;
+    }
+
+    //create converter decorator to allow linking
+    LinkedConverter linkedConverter = new LinkedConverter(myConverter1);
+
+    //check that these converters can be linked without an exception
+    try {
+      linkedConverter.link(myConverter2);
+    }
+    catch (IllegalArgumentException e){
+      System.out.println(e.getMessage());
+      return null;
+    }
+
+    //create command
+    Command command = new ConvertCommand(linkedConverter, numToConvert);
+    return command;
+  }
+
+  //takes one string describing a conversion type,
+  // and another string describing a string value
+  // returns a command for a inverted conversion or
+  // returns null if arguments are invalid
+  public static Command invertedCalculation(String converterString, String value) {
+
+    double numToConvert;
+
+    //input value validation
+    if (validateNumString(value))
+      numToConvert = Double.parseDouble(value);
+    else
+      return null;
+
+
+    ConverterFactory factory = ConverterFactory.getInstance();
+    UnitConverter myConverter = factory.create(converterString);
+
+    //display options if converter creation fails
+    if(myConverter == null){
+      System.out.println("\n - Conversion type not recognised! - ");
+      displayOptions();
+      return null;
+    }
+
+    //check that inversion converter can be used - will throw an exception if not
+    InversionConverter inversionConverter = null;
+    try {
+      inversionConverter = new InversionConverter(myConverter);
+    }
+    catch (IllegalArgumentException e){
+      System.out.println(e.getMessage());
+      return null;
+    }
+
+    Command command = new ConvertCommand(inversionConverter, numToConvert);
+    return command;
+
+  }
+
+  //takes one string describing a conversion type,
+  // and another string describing a string value
+  // returns a command for a basic conversion or
+  // returns null if arguments are invalid
+  public static Command basicCalculation(String converterString, String value){
+
+    double numToConvert;
+
+    //input value validation
+    if (validateNumString(value))
+      numToConvert = Double.parseDouble(value);
+    else
+      return null;
+
+    //attempt to create converter with factory
+    ConverterFactory factory = ConverterFactory.getInstance();
+    UnitConverter myConverter = factory.create(converterString);
+
+    //display options if converter creation fails
+    if(myConverter == null){
+      System.out.println("\nConversion type not recognised!");
+      displayOptions();
+      return null;
+    }
+
+    Command command = new ConvertCommand(myConverter, numToConvert);
+    return command;
+  }
+
+  //executes all conversions and prints results
+  public static void convertAndPrintAll(LinkedList<Command> commandList){
+
+    Invoker invoker = new Invoker();
+
+    System.out.println("---------------------------------------");
+    //cycle through command list and execute each command
+    for (int i = 0; i < commandList.size(); i++){
+
+      System.out.print("(" + i + "): ");
+      invoker.execute(commandList.get(i));
+    }
+    System.out.println("---------------------------------------");
+    System.out.println("Conversion program ended.");
+  }
+
+  //validates that a string can be converted safely to a double  - returns true if so
   public static boolean validateNumString(String inString){
 
     //input value validation
