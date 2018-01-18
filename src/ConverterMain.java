@@ -3,9 +3,12 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
-class Main {
+class ConverterMain {
   public static void main(String[] args)
   {
+
+    System.out.println("Converter Program Running");
+
     //command pattern actors
     LinkedList<Command> commandList = new LinkedList<>();
 
@@ -52,10 +55,8 @@ class Main {
       System.out.println("Enter a conversion: (Ctrl-D to quit and print all conversions)");
 
     }
-    //end test scanner loop=====================================================
 
     convertAndPrintAll(commandList);
-
 
   }
 

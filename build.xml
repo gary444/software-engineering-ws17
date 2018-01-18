@@ -1,0 +1,54 @@
+<project name="Converter" default="close">
+
+    <!--Clean previous builds-->
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="reports"/>
+    </target>
+
+    <!--Initialise reports folder, and expected result-->
+    <target name="init" depends="clean">
+        <mkdir dir="reports"/>
+        <echo file="reports/expected.txt">Tests: passed: 33, failed 0.</echo>
+    </target>
+
+    <!--Compile all java files-->
+    <target name="compile" depends="init">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+        <javac srcdir="src/TinyTestJ" destdir="build/classes"/>
+    </target>
+
+    <!--Run tests and save output to file-->
+    <target name="runtests" depends="compile">
+        <java classname="TinyTestJ.RunTests" classpath="build/classes" output="reports/results.txt">
+            <arg value="TestSuite"/>
+        </java>
+    </target>
+
+    <!--Compare expected results with output results file-->
+    <target name="compare_results" depends="runtests">
+        <condition property="tests_passed" value="true">
+            <filesmatch file1="reports/expected.txt"
+                        file2="reports/results.txt"
+                        textfile="true"/>
+        </condition>
+    </target>
+
+    <!--create jar IF tests passed-->
+    <target name="jar" depends="compare_results" if="tests_passed">
+
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Converter.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="ConverterMain"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!--delete reports-->
+    <target name="close" depends="jar">
+        <delete dir="reports"/>
+    </target>
+
+</project>
