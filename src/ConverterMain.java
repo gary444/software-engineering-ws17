@@ -219,10 +219,10 @@ class ConverterMain {
     System.out.println("- SquareMeterToSquareFoot");
     System.out.println("-------------------------");
     System.out.println("- To invert enter 'invert' after name of converter, e.g.");
-    System.out.println("- 'java Main EuroToDollar invert 1000");
+    System.out.println("- 'EuroToDollar invert 1000");
     System.out.println("-------------------------");
     System.out.println("- To chain converters enter two converter names, e.g.");
-    System.out.println("- 'java Main EuroToDollar PoundToEuro 1000");
+    System.out.println("- 'EuroToDollar PoundToEuro 1000");
     System.out.println("- this will convert from pound > euro > dollar\n\n");
 
   }

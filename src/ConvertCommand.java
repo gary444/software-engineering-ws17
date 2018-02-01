@@ -14,11 +14,14 @@ public class ConvertCommand implements Command {
     @Override
     public void execute() {
 
+        try{
+            double result = converter.convert(valueToConvert);
+            converter.printConversion(valueToConvert, result);
+        }
+        catch (IllegalArgumentException e){
+            System.out.println("Error: " + e.getMessage());
+        }
 
-
-        double result = converter.convert(valueToConvert);
-
-        converter.printConversion(valueToConvert, result);
 
     }
 }
